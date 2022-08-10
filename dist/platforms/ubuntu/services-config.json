@@ -1,0 +1,6 @@
+{
+  "licensingServiceBaseUrl": "http://10.243.6.149:777",
+  "enableEntitlementLicensing": true,
+  "clientConnectTimeoutSec": 60,
+  "clientHandshakeTimeoutSec": 30
+}

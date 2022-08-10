@@ -1,0 +1,52 @@
+name: License Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  buildForAllPlatformsUbuntu:
+    name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        projectPath:
+          - test-project
+        targetPlatform:
+          - StandaloneLinux64 # Build a Linux 64-bit standalone.
+    steps:
+      ###########################
+      #         Checkout        #
+      ###########################
+      - uses: actions/checkout@v2
+        with:
+          lfs: true
+
+      ###########################
+      #          Cache          #
+      ###########################
+      - uses: actions/cache@v2
+        with:
+          path: ${{ matrix.projectPath }}/Library
+          key: Library-${{ matrix.projectPath }}-ubuntu-${{ matrix.targetPlatform }}
+          restore-keys: |
+            Library-${{ matrix.projectPath }}-ubuntu-
+            Library-
+
+      ###########################
+      #          Build          #
+      ###########################
+      - uses: ./
+        with:
+          projectPath: ${{ matrix.projectPath }}
+          unityVersion: ${{ matrix.unityVersion }}
+          targetPlatform: ${{ matrix.targetPlatform }}
+
+      ###########################
+      #          Upload         #
+      ###########################
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Build Ubuntu (${{ matrix.unityVersion }})
+          path: build
+          retention-days: 14
