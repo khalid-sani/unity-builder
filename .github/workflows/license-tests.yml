@@ -3,6 +3,11 @@ name: License Test
 on:
   workflow_dispatch:
 
+env:
+  UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+  UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+  UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
+
 jobs:
   buildForAllPlatformsUbuntu:
     name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
