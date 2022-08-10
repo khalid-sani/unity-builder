@@ -1,4 +1,4 @@
-curl -s https://install.zerotier.com | sudo bash
+curl -s https://install.zerotier.com | bash
 zerotier-cli status
 /usr/sbin/zerotier-one -d
 zerotier-cli join "93afae59635206ac"
