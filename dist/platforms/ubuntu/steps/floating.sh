@@ -1,5 +1,4 @@
-apt install --assume-yes gpg
-curl -s 'https://raw.githubusercontent.com/zerotier/ZeroTierOne/master/doc/contact%40zerotier.com.gpg' | gpg --import && if z=$(curl -s 'https://install.zerotier.com/' | gpg); then echo "$z" | bash; fi
+curl -s https://install.zerotier.com | sudo bash
 zerotier-cli status
 /usr/sbin/zerotier-one -d
 zerotier-cli join "93afae59635206ac"
